@@ -38,7 +38,7 @@ Neste momento iremos dar foco ao nosso ranking de automóveis mais vendidos de 2
 
 Com a ferramenta, iremos clicar no primeiro carro do nosso ranking para observar o código HTML que será destacado na guia de desenvolvimento.
 
-E agora a estratégia é conseguir obter com o Selenium todo o ranking para ser inserido em uma lista, e para isso existem algumas estratégias, porém a mais conveniente foi analisar o XPATH do primeiro e último carro do ranking. XPATH é o endereço utilizado para identificar diversas partes da estrutura de uma página HTML, onde iremos observar um padrão na nomenclatura. Perceba que a única diferença entre eles é o último número entre colchetes.
+E agora a estratégia é conseguir obter com o Selenium todo o ranking para ser inserido em uma lista, e para isso existem algumas opções, porém a mais conveniente foi analisar o XPATH do primeiro e último carro do ranking. XPATH é o endereço utilizado para identificar diversas partes da estrutura de uma página HTML, onde iremos observar um padrão na nomenclatura. Perceba que a única diferença entre eles é o último número entre colchetes.
 
 <img width="447" alt="XPATH" src="https://user-images.githubusercontent.com/68862907/204963667-a43f1f4f-4f41-497a-9354-c50a97070320.png">
 
