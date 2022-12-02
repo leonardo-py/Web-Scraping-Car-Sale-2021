@@ -6,7 +6,13 @@ Informações Iniciais sobre o projeto:
 - A linguagem de programação utilizada é Python
 - A IDE utilizada para o processo foi o Jupyter Notebook
 - O brower escolhido foi o Google Chrome
-- As bibliotecas utilizadas no processo são Selenium e Pandas
+- As bibliotecas utilizadas no processo são Selenium, WebDriver Manager e Pandas
+
+Comando para instalação das bibliotecas:
+
+- pip install selenium
+- pip install webdriver-manager
+- pip install pandas
 
 Segue abaixo o link da página web utilizada:
 
@@ -20,7 +26,7 @@ O mais importante no código acima é a importação do webdriver para que seja 
 
 Importar o Service e o ChromeDriverManager embora não sejam essênciais para a rotina de web scraping, quando inseridos como argumento do webdriver.Chrome (momento de criação do navegador), ele implementa uma rotina de instalação/atualização de versões atuais do selenium, garantindo que o mesmo sempre esteja atualizado e funcional.
 
-FALAR DO IMPORT BY
+A linha de código para importação do comando By também é fundamental para o processo, pois através dela poderemos selecionar os elementos HTML pelo seu ID, Class_name, TAG_NAME, XPATH, entre outras formas.
 
 Agora iremos abrir nossa página web desejada, inserindo a URL como argumento do comando get
 <img width="639" alt="navegador get" src="https://user-images.githubusercontent.com/68862907/204959401-9dd7f789-fbe2-4d96-a236-f9e7dc66d9c3.png">
@@ -46,5 +52,35 @@ Dito isso, iremos criar uma lista armazenando os textos com o comendo 'append'. 
 
 Também é importante dizer que foi necessário inserir a função 'str()' na variável 'i' do loop para garantir que os valores numéricos seriam compreendidos pelo código como uma string.
 
+![listacarros](https://user-images.githubusercontent.com/68862907/205207168-88fc3e76-b87a-4e6d-91e5-0f13e33b1b0e.png)
 
+Gerada a lista de carros, podemos observar que a quantidade de emplacamentos e o nome do veículo estão unidas em uma string única. 
+
+<img width="724" alt="output lista carros" src="https://user-images.githubusercontent.com/68862907/205208517-f817ffc0-f203-47f6-8494-c9455440dc73.png">
+
+A partir de agora a intenção é coletar os valores da lista e criar um dicionário. 
+
+<img width="720" alt="dicionariocarros" src="https://user-images.githubusercontent.com/68862907/205208814-eac95bd9-ff6e-4ad1-a285-9f424d28fa7f.png">
+
+Devidamente organizadas as chaves e valores do dicionário, agora iniciaremos a etapa de criação do DataFrame, onde vamos utilizar a biblioteca Pandas.
+
+<img width="118" alt="import pandas" src="https://user-images.githubusercontent.com/68862907/205209410-10659396-e4cd-427f-8550-8b47d9d9d28d.png">
+
+Criando o Dataframe com o comando 'Dataframe' e visualizando as cinco primeiras linhas
+
+<img width="304" alt="dataframe" src="https://user-images.githubusercontent.com/68862907/205209903-d0d39776-d0c8-4333-a3f7-f4fd5363f397.png">
+
+E para finalizar iremos corrigir o nome das colunas do dataframe para algo mais intuitivo e funcional.
+
+<img width="322" alt="ranking final" src="https://user-images.githubusercontent.com/68862907/205210281-26c2bea1-56a0-4f2f-880c-d5495d050149.png">
+
+### Considerações Finais
+
+Neste artigo o processo de web scraping ocorreu com o uso da biblioteca Selenium, entretanto é importante ressaltar que existem diversas outras formas de realizar a raspagem de dados, como por exemplo a biblioteca BeautifulSoup ou até mesmo o próprio Pandas em situações mais específicas. Por fim também devemos ter cautela com o uso dessas ferramentas, visto que cada vez mais elas tem sido usadas para uma coleta indiscriminada de dados que podem violar diretrizes de determinados sites, causando bloqueios e em casos excepcionais até processos judiciais.
+
+<br /> <br /> <br /> <br /> 
+
+Se conecte comigo no linkedin: https://www.linkedin.com/in/leonardoandradedasilva/
+
+E-mail: leonardo.andrade.work@gmail.com
 
