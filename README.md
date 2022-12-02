@@ -1,6 +1,6 @@
 # Web Scraping de Venda de Carros em 2021
 ### Introdução
-Este artigo tem a intenção de documentar o processo de web scraping de um ranking de venda de carros em 2021, com a posterior elaboração de um dataset dos valores obtidos.
+Este artigo tem a intenção de documentar o processo de web scraping de um ranking de venda de carros de 2021, com a posterior elaboração de um dataset dos valores obtidos.
 
 Informações Iniciais sobre o projeto:
 - A linguagem de programação utilizada é Python
