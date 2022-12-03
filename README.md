@@ -20,6 +20,7 @@ https://g1.globo.com/economia/noticia/2022/01/06/veja-os-carros-mais-vendidos-de
 
 ### Mãos à Obra
 Vamos começar importando uma série de bibliotecas e módulos que serão importantes para o desenvolvimento do projeto.
+
 <img width="625" alt="importação" src="https://user-images.githubusercontent.com/68862907/204959004-bf871bbd-f3e6-4485-87e8-f526f715870a.png">
 
 O mais importante no código acima é a importação do webdriver para que seja possível criar um navegador, que no nosso caso estará armazenado na variável 'navegador'.
