@@ -21,7 +21,15 @@ https://g1.globo.com/economia/noticia/2022/01/06/veja-os-carros-mais-vendidos-de
 ### Mãos à Obra
 Vamos começar importando uma série de bibliotecas e módulos que serão importantes para o desenvolvimento do projeto.
 
-<img width="625" alt="importação" src="https://user-images.githubusercontent.com/68862907/204959004-bf871bbd-f3e6-4485-87e8-f526f715870a.png">
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service = servico)
+```
 
 O mais importante no código acima é a importação do webdriver para que seja possível criar um navegador, que no nosso caso estará armazenado na variável 'navegador'.
 
@@ -30,7 +38,9 @@ Importar o Service e o ChromeDriverManager embora não sejam essênciais para a 
 A linha de código para importação do comando By também é fundamental para o processo, pois através dela poderemos selecionar os elementos HTML pelo seu ID, Class_name, TAG_NAME, XPATH, entre outras formas.
 
 Agora iremos abrir nossa página web desejada, inserindo a URL como argumento do comando get
-<img width="639" alt="navegador get" src="https://user-images.githubusercontent.com/68862907/204959401-9dd7f789-fbe2-4d96-a236-f9e7dc66d9c3.png">
+```python
+navegador.get('https://g1.globo.com/economia/noticia/2022/01/06/veja-os-carros-mais-vendidos-de-2021-por-categoria.ghtml')
+```
 
 O site faz o raking de emplacamento por diversas categorias, porém, nesse artigo, vamos trabalhar apenas com a primeira tabela cuja categoria é 'Automóveis Mais Vendidos de 2021' em um Top 20
 
@@ -49,31 +59,61 @@ E agora a estratégia é conseguir obter com o Selenium todo o ranking para ser 
 
 <img width="447" alt="XPATH" src="https://user-images.githubusercontent.com/68862907/204963667-a43f1f4f-4f41-497a-9354-c50a97070320.png">
 
-Dito isso, iremos criar uma lista armazenando os textos com o comendo 'append'. Para que seja possível extrair o texto precisamos ao fim da linha de código inserir o parâmetro '.text', garantindo que um valor de texto será selecionado, que no nosso caso é o nome do nosso carro junto a sua quantidade emplacada.
+Dito isso, iremos criar uma lista armazenando os textos com o comando 'append'. Para que seja possível extrair o texto precisamos ao fim da linha de código inserir o parâmetro '.text', garantindo que um valor de texto será selecionado, que no nosso caso é o nome do nosso carro junto a sua quantidade emplacada.
 
 Também é importante dizer que foi necessário inserir a função 'str()' na variável 'i' do loop para garantir que os valores numéricos seriam compreendidos pelo código como uma string.
 
-![listacarros](https://user-images.githubusercontent.com/68862907/205207168-88fc3e76-b87a-4e6d-91e5-0f13e33b1b0e.png)
+```python
+lista_carros = []
 
+for i in range(1,21):
+    elemento = navegador.find_element(By.XPATH,'/html/body/div[2]/main/div[7]/article/div[3]/div[8]/ol/li['+ str(i) +']').text
+    lista_carros.append(elemento)
+    
+print(lista_carros)
+```
 Gerada a lista de carros, podemos observar que a quantidade de emplacamentos e o nome do veículo estão unidas em uma string única. 
 
 <img width="724" alt="output lista carros" src="https://user-images.githubusercontent.com/68862907/205208517-f817ffc0-f203-47f6-8494-c9455440dc73.png">
 
 A partir de agora a intenção é coletar os valores da lista e criar um dicionário. 
 
-<img width="720" alt="dicionariocarros" src="https://user-images.githubusercontent.com/68862907/205208814-eac95bd9-ff6e-4ad1-a285-9f424d28fa7f.png">
+```python
+dicionario_carros = {}
+
+for i in range(20):
+    split = lista_carros[i].split(':')
+    chave_dic = split[0]
+    valor_dic = split[1]
+    dicionario_carros[chave_dic] = valor_dic
+    
+print(dicionario_carros)
+```
+
+<img width="726" alt="dicionario_carros output" src="https://user-images.githubusercontent.com/68862907/205510785-bfd1e9a7-7887-470a-b0d8-47f687d23058.png">
 
 Devidamente organizadas as chaves e valores do dicionário, agora iniciaremos a etapa de criação do DataFrame, onde vamos utilizar a biblioteca Pandas.
 
-<img width="118" alt="import pandas" src="https://user-images.githubusercontent.com/68862907/205209410-10659396-e4cd-427f-8550-8b47d9d9d28d.png">
+```python
+import pandas as pd
+````
 
 Criando o Dataframe com o comando 'Dataframe' e visualizando as cinco primeiras linhas
 
-<img width="304" alt="dataframe" src="https://user-images.githubusercontent.com/68862907/205209903-d0d39776-d0c8-4333-a3f7-f4fd5363f397.png">
+```python
+df = pd.DataFrame(list(dicionario_carros.items()))
+df.head()
+```
+<img width="133" alt="df head" src="https://user-images.githubusercontent.com/68862907/205510882-cc8f876d-6485-4214-a88f-0dd585ce92e5.png">
 
 E para finalizar iremos corrigir o nome das colunas do dataframe para algo mais intuitivo e funcional.
 
-<img width="322" alt="ranking final" src="https://user-images.githubusercontent.com/68862907/205210281-26c2bea1-56a0-4f2f-880c-d5495d050149.png">
+```python
+df = df.rename(columns = {0:'Carro',1:'Emplacamento'})
+df
+```
+
+<img width="193" alt="df rename" src="https://user-images.githubusercontent.com/68862907/205510990-7cd13a49-c079-44dd-a521-938793419b6c.png">
 
 ### Considerações Finais
 
